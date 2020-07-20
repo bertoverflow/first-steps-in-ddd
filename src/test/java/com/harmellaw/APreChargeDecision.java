@@ -1,21 +1,28 @@
 package com.harmellaw;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class APreChargeDecision {
 
+    private Suspect suspect;
+    private PreChargeDecision aPreChargeDecision;
+    private OffenceAdvice offenceAdvice;
+
     @BeforeEach
     public void setup() {
+        suspect = new Suspect(CriminalOffence.CUTTING_AWAY_BUOYS_ETC);
+        offenceAdvice = new OffenceAdvice();
+        aPreChargeDecision = new PreChargeDecision();
     }
 
-    @Disabled("So the CI build stays green.  Remove this to get coding.")
     @Test
     public void shouldRecordAlternativeOffenceAdviceAgainstSuspects() {
-        fail();
+        aPreChargeDecision.recordAlternativeOffenceAdvice(suspect, offenceAdvice);
+
+        assertEquals(offenceAdvice, aPreChargeDecision.getOffenceAdviceFor(suspect));
     }
 
 }
